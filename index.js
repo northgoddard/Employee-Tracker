@@ -6,7 +6,7 @@ init();
 
 function init() {
     const logoText = logo({ name: 'Employee Tracker' }).render();
-
+    console.log(logoText);
     loadMainPrompts();
 }
 
@@ -14,7 +14,7 @@ function loadMainPrompts() {
     prompt([
         {
             type: 'list',
-            name: 'action',
+            name: 'choice',
             message: 'What would you like to do?',
             choices: [
                 {
@@ -24,10 +24,6 @@ function loadMainPrompts() {
                 {
                     name: 'View All Employees By Department',
                     value: 'VIEW_EMPLOYEES_BY_DEPARTMENT'
-                },
-                {
-                    name: 'View All Employees By Manager',
-                    value: 'VIEW_EMPLOYEES_BY_MANAGER'
                 },
                 {
                     name: 'Add Employee',
@@ -40,10 +36,6 @@ function loadMainPrompts() {
                 {
                     name: 'Update Employee Role',
                     value: 'UPDATE_EMPLOYEE_ROLE'
-                },
-                {
-                    name: 'Update Employee Manager',
-                    value: 'UPDATE_EMPLOYEE_MANAGER'
                 },
                 {
                     name: 'View All Roles',
@@ -76,7 +68,8 @@ function loadMainPrompts() {
             ]
         }
     ]).then(answer => {
-        switch (answer.action) {
+        let choice = res.choice
+        switch (choice) {
             case "VIEW_EMPLOYEES":
                 viewEmployees();
                 break;
@@ -127,6 +120,8 @@ function viewEmployees() {
     db.viewEmployees()
         .then(([rows]) => {
             let employees = rows;
+            console.log("\n");
+            console.table(employees);
         })
         .then(() => {
             loadMainPrompts();
@@ -415,15 +410,7 @@ function viewAllEmployeesByDepartment() {
           })
       }
 
-      function viewUtilizedBudgetByDepartment() {
-        db.viewDepartmentBudgets()
-          .then(([rows]) => {
-            let departments = rows;
-            console.log("\n");
-            console.table(departments);
-          })
-          .then(() => loadMainPrompts());
-      }
+
 
       function addEmployee() {
         prompt([

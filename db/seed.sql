@@ -1,3 +1,4 @@
+-- Active: 1686798994502@@127.0.0.1@3306@employees
 use employees
 
 INSERT INTO department (name)
