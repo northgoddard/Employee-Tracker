@@ -1,5 +1,5 @@
--- Active: 1686798994502@@127.0.0.1@3306@employees
-use employees
+-- Active: 1686798994502@@127.0.0.1@3306@business_db
+USE business_db;
 
 INSERT INTO department (name)
 VALUES ('Sales'), ('Engineering'), ('Finance'), ('Legal');
