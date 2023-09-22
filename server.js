@@ -56,7 +56,6 @@ const CLI = () => inquirer.prompt([
 
         case "Quit Menu":
         process.exit()
-        break;
     }
 });
 
